@@ -1,17 +1,16 @@
 import React from "react";
 
 interface SelectLimitPageProps{
-    selectLimit: (value: string) => void
-    limit: number
+  selectLimit: (value: string) => void
+  limit: number
 }
 
 export const SelectLimitPage: React.FC<SelectLimitPageProps> = ({selectLimit, limit}) => {
   return (
     <div className="row">
-    <div className="col s4 offset-s4">
+    <div className="col s2 offset-s5">
       <label>Кол-во элементов на странице</label>
-      <select onChange={(e)=>{selectLimit(e.target.value)}} className="browser-default">
-        <option defaultValue={limit} selected disabled>{limit}</option>
+      <select value={limit} onChange={(e)=>{selectLimit(e.target.value)}} className="browser-default">
         <option defaultValue="12">12</option>
         <option defaultValue="24">24</option>
         <option defaultValue="36">36</option>
