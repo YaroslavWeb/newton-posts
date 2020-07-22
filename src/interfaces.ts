@@ -17,8 +17,6 @@ export interface IComment {
 // Компоненты 
 export interface IHome {
     posts                   : IPost[]
-    curPosts                : IPost[]
-    curPage                 : number
     postsPerPage            : number
-    countPages              : number
+    isLoaded                : boolean
 }

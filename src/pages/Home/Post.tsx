@@ -25,24 +25,27 @@ export const Post: React.FC<PostProps> = ({ post }) => {
   // Комментарии поста
   const [comments, setComments] = React.useState<IComment[]>([]);
 
+  // Подгрузка комментариев
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = React.useState<boolean>(false);
+
   // Является ли пост избранным
   const [isFavorite, setIsFavorite] = React.useState<boolean>(favoritesList.includes(post.id));
 
   // Видимость комментариев
   const [isVisible, setIsVisible] = React.useState<boolean>(false);
 
-  // Подгрузка комментариев
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
-
   // Переключение комментариев и их подгрузка при появлении
   const toggleComments = async () => {
     if (isVisible) {
       setIsVisible(false);
-      setComments([]);
     } else {
       setIsLoading(true);
       setIsVisible(true);
-      setComments(await Api.comments(post.id));
+      if(!isLoaded){
+        setComments(await Api.comments(post.id))
+        setIsLoaded(true)
+      }
       setIsLoading(false);
     }
   };
