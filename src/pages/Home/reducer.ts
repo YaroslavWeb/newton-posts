@@ -2,13 +2,13 @@ import { IHome } from "../../interfaces";
 
 export const initialState: IHome = {
   posts: [],
-  postsPerPage: 12,
+  countPage: 0,
+  curPage:1,
   isLoaded: false,
 };
 
 export const ACTIONS: any = {
   INITIAL: "INITIAL-POSTS",
-  LIMIT: "LIMIT-POSTS",
 };
 
 export const homeReducer = (state: IHome, action: any) => {
@@ -16,14 +16,10 @@ export const homeReducer = (state: IHome, action: any) => {
     case ACTIONS.INITIAL: {
       return {
         ...state,
-        posts: action.value,
+        posts: action.value.posts,
+        countPage: Math.ceil(action.value.totalCount / 12),
+        curPage: action.value.curPage,
         isLoaded: true,
-      };
-    }
-    case ACTIONS.LIMIT: {
-      return {
-        ...state,
-        postsPerPage: action.value,
       };
     }
     default:
